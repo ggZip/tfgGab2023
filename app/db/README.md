@@ -1,26 +1,38 @@
-# Base de datos
+# Base de Datos
 
-Esta carpeta contiene los archivos de migración y la configuración de Docker para la base de datos de la aplicación.
+Este directorio contiene las migraciones de la base de datos para cada uno de los servicios en la aplicación.
 
-## Estructura de carpetas
+## Estructura
 
 ```
 db
-├── migrations
-│ ├── 001_create_usuarios.sql
-│ ├── 002_create_cuestionarios.sql
-│ ├── 003_create_preguntas.sql
-│ ├── 004_create_respuestas.sql
-│ └── 005_create_resultados.sql
+├── migrations/
+│ ├── questionnaires/
+│ │    ├── 001_create_questionnaires_table.sql
+│ ├── realtestscores/
+│ │    ├── 001_create_realtestscores_table.sql
+│ ├── users/
+│ │    ├── 001_create_usuarios_table.sql
 ├── Dockerfile
 ├── init-db.sh
 └── README-md
 ```
 
-
 ## Migraciones
 
-Las migraciones están ubicadas en la carpeta `migrations`. Cada archivo de migración contiene una instrucción SQL que crea una tabla en la base de datos.
+Las migraciones están ubicadas en la carpeta `migrations`. Cada archivo de migración contiene una instrucción SQL que crea una tabla en la base de datos. Estos archivos se ejecutarán al iniciar la base de datos.
+
+### Usuarios
+
+Contiene la tabla `users` que almacena la información de los usuarios y sus roles.
+
+### Questionnaires
+
+Contiene las tablas `questionnaires` y `questions` para almacenar los cuestionarios creados por los administradores y las preguntas asociadas.
+
+### Real Test Scores
+
+Contiene la tabla `real_test_scores` que almacena la nota real obtenida por los usuarios en los exámenes reales junto con las respuestas dadas en el cuestionario asociado.
 
 ## Docker
 
