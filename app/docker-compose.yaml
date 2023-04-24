@@ -8,3 +8,25 @@ services:
       POSTGRES_DB: mydb
     ports:
       - "5432:5432"
+  user_management:
+    build: ./microservices/user_management
+    container_name: user_management
+    restart: always
+    ports:
+      - '3001:3001'
+    environment:
+      - PORT=3001
+      - DATABASE_URL=postgresql://gabuntu:gabuntuPassword@db:5432/mydb
+    depends_on:
+      - db
+  authentication:
+    build: ./microservices/authentication
+    container_name: authentication
+    restart: always
+    ports:
+      - '3002:3002'
+    environment:
+      - PORT=3002
+      - DATABASE_URL=postgresql://gabuntu:gabuntuPassword@db:5432/mydb
+    depends_on:
+      - db
