@@ -8,6 +8,7 @@ services:
       POSTGRES_DB: mydb
     ports:
       - "5432:5432"
+
   user_management:
     build: ./microservices/user_management
     container_name: user_management
@@ -19,6 +20,7 @@ services:
       - DATABASE_URL=postgresql://gabuntu:gabuntuPassword@db:5432/mydb
     depends_on:
       - db
+
   authentication:
     build: ./microservices/authentication
     container_name: authentication
@@ -30,3 +32,16 @@ services:
       - DATABASE_URL=postgresql://gabuntu:gabuntuPassword@db:5432/mydb
     depends_on:
       - db
+
+  tyk_gateway:
+    image: 'tykio/tyk-gateway:v4.0.0'
+    ports:
+      - '8080:8080'
+    volumes:
+      - './tyk_api_gateway/tyk.conf:/opt/tyk-gateway/tyk.conf'
+      - './tyk_api_gateway/apis:/opt/tyk-gateway/apps'
+    depends_on:
+      - redis
+
+  redis:
+    image: 'redis:6.2-alpine'

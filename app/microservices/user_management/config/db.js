@@ -1,8 +1,7 @@
 const { Pool } = require('pg');
-const connectionString = 'postgresql://gabuntu:gabuntuPassword@localhost/mydb';
 
 const pool = new Pool({
-  connectionString,
+  connectionString: process.env.DATABASE_URL,
 });
 
 module.exports = {
