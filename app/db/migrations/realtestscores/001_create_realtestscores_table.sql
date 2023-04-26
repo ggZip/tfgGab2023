@@ -1,8 +1,6 @@
-CREATE TABLE real_test_scores (
+CREATE TABLE real_mark (
     id SERIAL PRIMARY KEY,
-    user_id VARCHAR(100) NOT NULL,
-    questionnaire_id INTEGER NOT NULL,
-    score NUMERIC(5, 2),
-    FOREIGN KEY (user_id) REFERENCES users (email),
-    FOREIGN KEY (questionnaire_id) REFERENCES questionnaires (id)
+    real_mark DECIMAL,
+    questionnaire_id INTEGER,
+    FOREIGN KEY (questionnaire_id) REFERENCES questionnaires(id)
 );
