@@ -3,7 +3,7 @@ const validator = require('validator');
 const bcrypt = require('bcrypt');
 
 exports.createUser = async (req, res) => {
-  const { username, role, email, password } = req.body;
+  const { username, email, password } = req.body;
 
   // Validación del correo electrónico
   if (!validator.isEmail(email)) {
@@ -16,8 +16,8 @@ exports.createUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const result = await db.query(
-      'INSERT INTO users (username, role, email, password) VALUES ($1, $2, $3, $4) RETURNING *',
-      [username, role, email, hashedPassword]
+      'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *',
+      [username,  email, hashedPassword]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
