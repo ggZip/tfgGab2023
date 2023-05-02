@@ -16,7 +16,7 @@ services:
       - db_data:/var/lib/postgresql/data
 
   user_management:
-    build: ./microservices/user_management
+    build: ./services/user_management
     container_name: user_management
     restart: always
     ports:
@@ -28,7 +28,7 @@ services:
       - db
 
   authentication:
-    build: ./microservices/authentication
+    build: ./services/authentication
     container_name: authentication
     restart: always
     ports:
@@ -40,9 +40,20 @@ services:
       - db
 
   questionnaire:
-    build: ./microservices/questionnaire
+    build: ./services/questionnaire
+    container_name: questionnaire
+    restart: always
     ports:
       - "3003:3003"
+    depends_on:
+      - db
+
+  evaluation:
+    build: ./services/evaluation
+    container_name: evaluation
+    restart: always
+    ports:
+      - "3004:3004"
     depends_on:
       - db
 

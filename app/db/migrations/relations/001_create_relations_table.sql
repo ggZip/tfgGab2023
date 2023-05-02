@@ -4,7 +4,7 @@ CREATE TABLE user_questions_answers (
     question_id INTEGER,
     answer_id INTEGER,
     calculated_mark DECIMAL,
-    real_mark DECIMAL,
+    real_mark DECIMAL NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (question_id) REFERENCES questions(id),
     FOREIGN KEY (answer_id) REFERENCES answers(id)
