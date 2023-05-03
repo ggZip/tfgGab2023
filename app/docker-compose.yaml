@@ -6,6 +6,8 @@ services:
         - "80:80"
   db:
     build: ./db
+    container_name: database
+    restart: always
     environment:
       POSTGRES_USER: gabuntu
       POSTGRES_PASSWORD: gabuntuPassword
@@ -54,6 +56,15 @@ services:
     restart: always
     ports:
       - "3004:3004"
+    depends_on:
+      - db
+
+  real_mark_track:
+    build: ./services/real_mark_track
+    container_name: real_mark_track
+    restart: always
+    ports:
+      - "3005:3005"
     depends_on:
       - db
 
