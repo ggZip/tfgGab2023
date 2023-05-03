@@ -1,6 +1,6 @@
 from flask import request, jsonify
-from models import db, UserQuestionAnswer
-from utils import calculate_mark
+from models import db
+from utils import calculate_mark, get_user_id, get_answer_ids, create_questionnaire, create_questionnaire_question_answers
 
 def register_routes(app):
     @app.route("/evaluate", methods=["POST"])
@@ -8,23 +8,24 @@ def register_routes(app):
 
         user_answers = request.get_json()
 
-        answer_ids = [user_answer["answer_id"] for user_answer in user_answers]
+        user_id = get_user_id(user_answers)
+        answer_ids = get_answer_ids(user_answers)
 
         calculated_mark = calculate_mark(answer_ids)
 
-        for user_answer in user_answers:
-            user_id = user_answer["user_id"]
-            question_id = user_answer["question_id"]
-            answer_id = user_answer["answer_id"]
+        questionnaire = create_questionnaire(user_id, calculated_mark)
 
-            user_question_answer = UserQuestionAnswer(
-                user_id=user_id,
-                question_id=question_id,
-                answer_id=answer_id,
-                calculated_mark=calculated_mark,
-            )
+        db.session.add(questionnaire)
+        db.session.commit()
 
-            db.session.add(user_question_answer)
+        questionnaire_id = questionnaire.id
+
+        questionnaire_question_answers = create_questionnaire_question_answers(
+            user_answers, questionnaire_id
+        )
+
+        for qqa in questionnaire_question_answers:
+            db.session.add(qqa)
 
         db.session.commit()
 

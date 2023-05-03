@@ -2,14 +2,12 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class UserQuestionAnswer(db.Model):
-    __tablename__ = "user_questions_answers"
+class QuestionnaireQuestionAnswer(db.Model):
+    __tablename__ = "questionnaire_questions_answers"
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    questionnaire_id = db.Column(db.Integer, db.ForeignKey("questionnaire.id"))
     question_id = db.Column(db.Integer, db.ForeignKey("questions.id"))
     answer_id = db.Column(db.Integer, db.ForeignKey("answers.id"))
-    calculated_mark = db.Column(db.Float)
-    real_mark = db.Column(db.Float, nullable=True)
 
 class Answer(db.Model):
     __tablename__ = "answers"
@@ -29,3 +27,10 @@ class User(db.Model):
     email = db.Column(db.String(255), unique=True, nullable=False)
     username = db.Column(db.String(255), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
+
+class Questionnaire(db.Model):
+    __tablename__ = "questionnaire"
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    calculated_mark = db.Column(db.Float)
+    real_mark = db.Column(db.Float, nullable=True)

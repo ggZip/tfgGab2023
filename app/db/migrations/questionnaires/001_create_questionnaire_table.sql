@@ -1,3 +1,11 @@
+CREATE TABLE questionnaire (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER,
+    calculated_mark DECIMAL,
+    real_mark DECIMAL NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
 CREATE TABLE questions (
     id SERIAL PRIMARY KEY,
     question_text TEXT
