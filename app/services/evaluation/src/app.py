@@ -1,11 +1,11 @@
 from flask import Flask
 from routes import register_routes
 from models import db
+from config import Config
 
 app = Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://gabuntu:gabuntuPassword@db:5432/mydb"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config.from_object(Config)
 db.init_app(app)
 
 register_routes(app)

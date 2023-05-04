@@ -11,10 +11,10 @@ type Answer struct {
 	Weight     float64 `json:"weight"`
 }
 
-func FetchAnswersByQuestionID(db *pgxpool.Pool, questionID int64) ([]Answer, error) {
+func FetchAnswersByQuestionID(ctx context.Context, db *pgxpool.Pool, questionID int64) ([]Answer, error) {
 	answers := []Answer{}
 
-	rows, err := db.Query(context.Background(), "SELECT id, answer_text, weight FROM answers WHERE question_id = $1", questionID)
+	rows, err := db.Query(ctx, "SELECT id, answer_text, weight FROM answers WHERE question_id = $1", questionID)
 	if err != nil {
 		return nil, err
 	}

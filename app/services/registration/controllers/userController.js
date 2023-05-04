@@ -1,14 +1,8 @@
 const db = require('../config/db');
-const validator = require('validator');
 const bcrypt = require('bcrypt');
 
 exports.createUser = async (req, res) => {
   const { username, email, password } = req.body;
-
-  // Validación del correo electrónico
-  if (!validator.isEmail(email)) {
-    return res.status(400).json({ error: 'Invalid email format' });
-  }
 
   try {
     // Encriptación de la contraseña

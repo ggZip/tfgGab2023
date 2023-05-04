@@ -1,9 +1,9 @@
 {
-    "id": "your-api-id",
-    "name": "NodeAppAPI",
-    "slug": "user_management",
-    "api_id": "your-api-id",
-    "org_id": "your-org-id",
+    "id": "real-mark-api",
+    "name": "FifthAppAPI",
+    "slug": "real_mark",
+    "api_id": "bad52674-6b0a-4dff-b38b-57baf9e77fe3",
+    "org_id": "885274e7-bfab-40d1-b291-6789486930d3",
     "use_keyless": true,
     "auth": {
       "auth_header_name": "Authorization"
@@ -24,8 +24,8 @@
       }
     },
     "proxy": {
-      "listen_path": "/api/v1",
-      "target_url": "http://user_management:3001/",
+      "listen_path": "/api5",
+      "target_url": "http://real_mark:3005/",
       "strip_listen_path": true
     },
     "active": true,
@@ -48,4 +48,4 @@
     },
     "do_not_track": false
   }
-    
+  

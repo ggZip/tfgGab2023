@@ -11,10 +11,10 @@ type Question struct {
 	Answers      []Answer `json:"answers"`
 }
 
-func FetchQuestionnaire(db *pgxpool.Pool) ([]Question, error) {
+func FetchQuestionnaire(ctx context.Context, db *pgxpool.Pool) ([]Question, error) {
 	questions := []Question{}
 
-	rows, err := db.Query(context.Background(), "SELECT id, question_text FROM questions")
+	rows, err := db.Query(ctx, "SELECT id, question_text FROM questions")
 	if err != nil {
 		return nil, err
 	}
@@ -27,7 +27,7 @@ func FetchQuestionnaire(db *pgxpool.Pool) ([]Question, error) {
 			return nil, err
 		}
 
-		answers, err := FetchAnswersByQuestionID(db, question.ID)
+		answers, err := FetchAnswersByQuestionID(ctx, db, question.ID)
 		if err != nil {
 			return nil, err
 		}

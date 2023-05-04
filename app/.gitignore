@@ -1,0 +1,19 @@
+# .gitignore
+
+# Ignorar archivos y carpetas de Docker
+.dockerignore
+.docker/
+*.log
+
+# Ignorar archivos generados por Tyk
+tyk_api_gateway/analytics/
+tyk_api_gateway/middleware/
+tyk_api_gateway/policies/
+tyk_api_gateway/templates/
+tyk_api_gateway/apps/*.json
+
+# Ignorar archivos generados por MacOS
+.DS_Store
+
+# Ignorar archivos generados por Windows
+Thumbs.db

@@ -1,9 +1,9 @@
 {
-    "id": "your-third-api-id",
-    "name": "ThirdAppAPI",
+    "id": "questionnaire-api",
+    "name": "QuestionnaireAppAPI",
     "slug": "questionnaire",
-    "api_id": "your-third-api-id",
-    "org_id": "your-org-id",
+    "api_id": "bad52674-6b0a-4dff-b38b-57baf9e77fe3",
+    "org_id": "885274e7-bfab-40d1-b291-6789486930d3",
     "use_keyless": true,
     "auth": {
       "auth_header_name": "Authorization"
@@ -24,7 +24,7 @@
       }
     },
     "proxy": {
-      "listen_path": "/api3/v1",
+      "listen_path": "/api3",
       "target_url": "http://questionnaire:3003/",
       "strip_listen_path": true
     },
