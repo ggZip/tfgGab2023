@@ -2,11 +2,13 @@ version: '3.8'
 services:
   frontend:
       build: ./frontend
+      container_name:  Frontend
       ports:
         - "80:80"
+        
   db:
     build: ./db
-    container_name: database
+    container_name: Database
     restart: always
     environment:
       POSTGRES_USER: gabuntu
@@ -17,21 +19,25 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
-  user_management:
-    build: ./services/user_management
-    container_name: user_management
+  registration:
+    build: ./services/registration
+    container_name: Registration
     restart: always
     ports:
       - '3001:3001'
     environment:
       - PORT=3001
-      - DATABASE_URL=postgresql://gabuntu:gabuntuPassword@db:5432/mydb
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=gabuntu
+      - DB_PASSWORD=gabuntuPassword
+      - DB_NAME=mydb
     depends_on:
       - db
 
   authentication:
     build: ./services/authentication
-    container_name: authentication
+    container_name: Authentication
     restart: always
     ports:
       - '3002:3002'
@@ -43,7 +49,7 @@ services:
 
   questionnaire:
     build: ./services/questionnaire
-    container_name: questionnaire
+    container_name: Questionnaire
     restart: always
     ports:
       - "3003:3003"
@@ -52,16 +58,16 @@ services:
 
   evaluation:
     build: ./services/evaluation
-    container_name: evaluation
+    container_name: Evaluation
     restart: always
     ports:
       - "3004:3004"
     depends_on:
       - db
 
-  real_mark_track:
-    build: ./services/real_mark_track
-    container_name: real_mark_track
+  real_mark:
+    build: ./services/real_mark
+    container_name: RealMark
     restart: always
     ports:
       - "3005:3005"

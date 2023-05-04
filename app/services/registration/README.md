@@ -1,6 +1,6 @@
-# Authentication Service
+# Servicio de Registro
 
-Este servicio proporciona la funcionalidad de autenticación para los usuarios, incluyendo el inicio de sesión.
+Este servicio maneja el registro de usuarios en la aplicación.
 
 ## Requisitos
 
@@ -10,19 +10,19 @@ Este servicio proporciona la funcionalidad de autenticación para los usuarios, 
 ## Estructura de archivos
 
 ```
-authentication
+registration
 ├── Dockerfile
 ├── README.md
 ├── app.js
 ├── config
 │ └── db.js
 ├── controllers
-│ └── authController.js
+│ └── userController.js
 ├── middlewares
-│ └── authValidationMiddleware.js
+│ └── validationMiddleware.js
 ├── package.json
 └── routes
-  └── authRoutes.js
+  └── userRoutes.js
 ```
 
 ## Cómo ejecutar el servicio localmente
@@ -36,7 +36,7 @@ authentication
 ```bash
 docker-compose up -d
 ```
-El servicio de registro debería estar en ejecución en el puerto 3002.
+El servicio de registro debería estar en ejecución en el puerto 3001.
 
 ## API
-- `POST /auth/login`: Se realiza el login del usuario.
+- `POST /users/register`: Registra un nuevo usuario en la aplicación.

@@ -3,9 +3,9 @@ const app = express();
 const userRoutes = require('./routes/userRoutes');
 
 app.use(express.json());
-app.use('/users', userRoutes);
+app.use('/user', userRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`User management service is running on port ${PORT}`);
+  console.log(`Registration service is running on port ${PORT}`);
 });

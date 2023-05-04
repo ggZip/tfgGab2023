@@ -7,13 +7,13 @@ import (
 
 const dsn = "postgresql://gabuntu:gabuntuPassword@db:5432/mydb"
 
-func ConnectDB() (*pgxpool.Pool, error) {
+func ConnectDB(ctx context.Context) (*pgxpool.Pool, error) {
 	poolConfig, err := pgxpool.ParseConfig(dsn)
 	if err != nil {
 		return nil, err
 	}
 
-	pool, err := pgxpool.ConnectConfig(context.Background(), poolConfig)
+	pool, err := pgxpool.ConnectConfig(ctx, poolConfig)
 	if err != nil {
 		return nil, err
 	}

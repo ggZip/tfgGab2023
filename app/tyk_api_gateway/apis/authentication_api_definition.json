@@ -1,9 +1,9 @@
 {
-    "id": "your-second-api-id",
-    "name": "SecondAppAPI",
+    "id": "authentication-api",
+    "name": "AuthenticationAppAPI",
     "slug": "authentication",
-    "api_id": "your-second-api-id",
-    "org_id": "your-org-id",
+    "api_id": "bad52674-6b0a-4dff-b38b-57baf9e77fe3",
+    "org_id": "885274e7-bfab-40d1-b291-6789486930d3",
     "use_keyless": true,
     "auth": {
       "auth_header_name": "Authorization"
@@ -24,7 +24,7 @@
       }
     },
     "proxy": {
-      "listen_path": "/api2/v1",
+      "listen_path": "/api2",
       "target_url": "http://authentication:3002/",
       "strip_listen_path": true
     },

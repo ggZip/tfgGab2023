@@ -8,13 +8,22 @@ import (
 	"github.com/jackc/pgx/v4/pgxpool"
 )
 
-func GetQuestionnaire(db *pgxpool.Pool) echo.HandlerFunc {
-	return func(c echo.Context) error {
-		questions, err := models.FetchQuestionnaire(db)
-		if err != nil {
-			return c.JSON(http.StatusInternalServerError, err.Error())
-		}
+type QuestionnaireHandler struct {
+	DB *pgxpool.Pool
+}
 
-		return c.JSON(http.StatusOK, questions)
+func NewQuestionnaireHandler(db *pgxpool.Pool) *QuestionnaireHandler {
+	return &QuestionnaireHandler{
+		DB: db,
 	}
+}
+
+func (h *QuestionnaireHandler) GetQuestionnaire(c echo.Context) error {
+	ctx := c.Request().Context()
+	questions, err := models.FetchQuestionnaire(ctx, h.DB)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, questions)
 }

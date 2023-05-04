@@ -1,9 +1,9 @@
 {
-    "id": "your-fifth-api-id",
-    "name": "FifthAppAPI",
-    "slug": "real_mark_track",
-    "api_id": "your-fifth-api-id",
-    "org_id": "your-org-id",
+    "id": "registration-api",
+    "name": "RegistrationAppAPI",
+    "slug": "registration",
+    "api_id": "bad52674-6b0a-4dff-b38b-57baf9e77fe3",
+    "org_id": "885274e7-bfab-40d1-b291-6789486930d3",
     "use_keyless": true,
     "auth": {
       "auth_header_name": "Authorization"
@@ -24,8 +24,8 @@
       }
     },
     "proxy": {
-      "listen_path": "/api5/v1",
-      "target_url": "http://realmarktrack:3003/",
+      "listen_path": "/api1",
+      "target_url": "http://registration:3001/",
       "strip_listen_path": true
     },
     "active": true,
@@ -48,4 +48,4 @@
     },
     "do_not_track": false
   }
-  
+    

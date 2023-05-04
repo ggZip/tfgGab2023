@@ -8,7 +8,7 @@ function Login() {
 
     const handleLogin = async () => {
         try {
-        const response = await fetch('http://localhost:8080/api2/v1/auth/login', {
+        const response = await fetch('http://localhost:8080/api2/auth/login', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
