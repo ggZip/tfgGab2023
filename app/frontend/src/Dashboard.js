@@ -8,7 +8,9 @@ function Dashboard() {
       <Link to="/questionnaire">
         <button>Realizar nuevo cuestionario</button>
       </Link>
+      <Link to="/user_questionnaires">
       <button>Ver cuestionarios realizados</button>
+      </Link>
     </div>
   );
 }

@@ -3,6 +3,7 @@ CREATE TABLE questionnaire (
     user_id INTEGER,
     calculated_mark DECIMAL,
     real_mark DECIMAL NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
