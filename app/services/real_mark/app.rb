@@ -24,6 +24,5 @@ class RealMarkTrackApp < Sinatra::Base
     { message: "Real mark updated successfully" }.to_json
   end
 
-  # Iniciar la aplicación
   run! if __FILE__ == $0
 end

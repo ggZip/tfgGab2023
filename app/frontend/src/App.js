@@ -1,37 +1,34 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import './App.css';
-import Register from './Register';
-import Login from './Login';
-
-function Home() {
-  return (
-    <>
-      <h1>Calculadora de notas</h1>
-      <Link to="/register">
-        <button>Registrarse</button>
-      </Link>
-      <Link to="/login">
-      <button>Iniciar sesión</button>
-      </Link>
-    </>
-  );
-}
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Register from "./Register";
+import Login from "./Login";
+import Dashboard from "./Dashboard";
+import Questionnaire from "./Questionnaire";
+import Header from "./Header";
+import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+        <Header />
+        <NavBar />
+        <div className="container">
+          <main className="main-content">
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/questionnaire" element={<Questionnaire />} />
+            </Routes>
+          </main>
+        </div>
+        <Footer />
       </div>
     </Router>
   );
 }
 
 export default App;
-
-
