@@ -24,3 +24,4 @@ El servicio de cuestionario ahora debería estar en ejecución y escuchando en e
 
 ## API
 - `GET /questionnaire`: Devuelve las preguntas y respuestas del cuestionario.
+- `GET /questionnaire/user/{user_id}`: Devuelve los cuestionarios realizados por un usuario.

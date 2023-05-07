@@ -24,6 +24,7 @@ func main() {
 
 	handler := handlers.NewQuestionnaireHandler(db)
 	e.GET("/questionnaire", handler.GetQuestionnaire)
+	e.GET("/questionnaire/user/:user_id", handler.GetUserQuestionnaires)
 
 	if err := e.Start(":3003"); err != nil && err != http.ErrServerClosed {
         log.Fatalf("Failed to start the server: %v", err)

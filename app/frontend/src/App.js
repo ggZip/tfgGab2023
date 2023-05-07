@@ -5,6 +5,7 @@ import Register from "./Register";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Questionnaire from "./Questionnaire";
+import UserQuestionnaires from "./UserQuestionnaires";
 import Header from "./Header";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
@@ -22,6 +23,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/questionnaire" element={<Questionnaire />} />
+              <Route path="/user_questionnaires" element={<UserQuestionnaires />} />
             </Routes>
           </main>
         </div>
