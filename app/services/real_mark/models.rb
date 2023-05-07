@@ -1,5 +1,3 @@
-# models.rb
-
 require 'sinatra/activerecord'
 
 class Questionnaire < ActiveRecord::Base
