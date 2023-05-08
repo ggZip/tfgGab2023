@@ -9,27 +9,30 @@ import UserQuestionnaires from "./UserQuestionnaires";
 import Header from "./Header";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import { AuthProvider } from "./AuthContext";
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <NavBar />
-        <div className="container">
-          <main className="main-content">
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/questionnaire" element={<Questionnaire />} />
-              <Route path="/user_questionnaires" element={<UserQuestionnaires />} />
-            </Routes>
-          </main>
+    <AuthProvider>
+      <Router>
+        <div className="App">
+          <Header />
+          <NavBar />
+          <div className="container">
+            <main className="main-content">
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/questionnaire" element={<Questionnaire />} />
+                <Route path="/user_questionnaires" element={<UserQuestionnaires />} />
+              </Routes>
+            </main>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 
