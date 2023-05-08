@@ -1,17 +1,47 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from './AuthContext';
 
 const UserQuestionnaires = () => {
   const [questionnaires, setQuestionnaires] = useState([]);
-  const [realMark, setRealMark] = useState('');
+  const [realMarks, setRealMarks] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  const { user } = useAuth();
+
+  const fetchQuestionnaires = async () => {
+    const response = await fetch(`http://localhost:8080/api3/questionnaire/user/${user.userId}`);
+    const data = await response.json();
+    setQuestionnaires(data);
+  };
 
   useEffect(() => {
-    fetch('http://localhost:8080/api3/questionnaire/user/1')
-      .then((response) => response.json())
-      .then((data) => setQuestionnaires(data));
-  }, []);
+    fetchQuestionnaires();
+  }, [user]);
 
-  const handleSubmit = () => {
-    // Aquí puedes agregar la lógica para enviar la nota cuando se implemente
+  const handleSubmit = async (questionnaireId) => {
+    const realMark = realMarks[questionnaireId];
+
+    if (realMark === undefined || isNaN(realMark)) {
+      alert('No ha introducido una nota');
+      return;
+    }
+
+    await fetch("http://localhost:8080/api5/update_real_mark", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        questionnaire_id: questionnaireId,
+        real_mark: realMark,
+      }),
+    });
+
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    fetchQuestionnaires();
   };
 
   const formatDate = (dateString) => {
@@ -19,11 +49,18 @@ const UserQuestionnaires = () => {
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   };
 
+  const handleInputChange = (questionnaireId, value) => {
+    setRealMarks((prevRealMarks) => ({
+      ...prevRealMarks,
+      [questionnaireId]: parseFloat(value),
+    }));
+  };
+
   return (
     <div className="UserQuestionnaires">
       {questionnaires.length === 0 ? (
-        <p>No se han realizado cuestionarios</p>
-    ) : (
+        <p className="no-questionnaires-message">No se han realizado cuestionarios</p>
+      ) : (
         <div className="questionnaire-list">
           {questionnaires.map((q) => (
             <div key={q.id} className="questionnaire-item">
@@ -34,8 +71,22 @@ const UserQuestionnaires = () => {
                   <div>Nota real: {q.real_mark}</div>
                 ) : (
                   <>
-                    <input type="text" placeholder="Nota real" />
-                    <button>Enviar nota</button>
+                    <input
+                      type="text"
+                      placeholder="Nota real"
+                      onChange={(e) => handleInputChange(q.id, e.target.value)}
+                    />
+                    <button onClick={() => handleSubmit(q.id)}>
+                      Enviar nota
+                    </button>
+                    {showModal && (
+                      <div className="modal">
+                        <div className="modal-content">
+                          <p>Gracias por el feedback</p>
+                          <button onClick={closeModal}>De nada</button>
+                        </div>
+                      </div>
+                    )}
                   </>
                 )}
               </div>

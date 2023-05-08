@@ -1,12 +1,14 @@
 import "./App.css";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = async () => {
     try {
@@ -19,8 +21,10 @@ function Login() {
       });
 
       if (response.ok) {
+        const data = await response.json();
         setMessage("Inicio de sesión exitoso");
-        navigate("/dashboard");
+        login(data.user.id);
+        navigate("/dashboard");;
       } else {
         const error = await response.json();
         setMessage(`Error de inicio de sesión: ${error.error}`);

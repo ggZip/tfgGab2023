@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 const Questionnaire = () => {
   const [questions, setQuestions] = useState([]);
@@ -8,6 +9,7 @@ const Questionnaire = () => {
   const [message, setMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   useEffect(() => {
     fetch('http://localhost:8080/api3/questionnaire')
@@ -31,7 +33,7 @@ const Questionnaire = () => {
       setErrorMessage('Faltan preguntas por contestar');
     } else {
       const requestData = answers.map((answerId, index) => ({
-        user_id: 1,
+        user_id: user.userId,
         question_id: questions[index].id,
         answer_id: answerId,
       }));
@@ -74,7 +76,7 @@ const Questionnaire = () => {
           ))}
         </div>
       ))}
-      <button onClick={handleSubmit}>Enviar cuestionario</button>
+      <button onClick={handleSubmit} className="submit-questionnaire-button">Enviar cuestionario</button>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       {showModal && (
