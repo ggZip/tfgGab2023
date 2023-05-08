@@ -1,5 +1,10 @@
 const db = require('../config/db');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+const generateToken = (user) => {
+  return jwt.sign({ id: user.id }, 'tfg-2023-calculo-probabilidad-aprobado', { expiresIn: '1h' });
+};
 
 exports.login = async (req, res) => {
   const { email, password } = req.body;
@@ -18,8 +23,8 @@ exports.login = async (req, res) => {
       return res.status(400).json({ error: 'Invalid email or password' });
     }
 
-    // Aquí puedes generar y devolver un token de autenticación (por ejemplo, JWT) para el usuario.
-    res.status(200).json({ message: 'Login successful', user });
+    const token = generateToken(user);
+    res.status(200).json({ message: 'Login successful', user, token });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

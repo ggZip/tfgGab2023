@@ -1,8 +1,8 @@
 -- Pregunta 1
 INSERT INTO questions (question_text) VALUES ('Pregunta 1');
-INSERT INTO answers (answer_text, weight, question_id) VALUES ('Respuesta 1.1', 0.33, 1);
-INSERT INTO answers (answer_text, weight, question_id) VALUES ('Respuesta 1.2', 0.66, 1);
-INSERT INTO answers (answer_text, weight, question_id) VALUES ('Respuesta 1.3', 0.99, 1);
+INSERT INTO answers (answer_text, weight, question_id) VALUES ('Respuesta 1.1', 3.3, 1);
+INSERT INTO answers (answer_text, weight, question_id) VALUES ('Respuesta 1.2', 6.6, 1);
+INSERT INTO answers (answer_text, weight, question_id) VALUES ('Respuesta 1.3', 9.9, 1);
 
 -- Pregunta 2
 INSERT INTO questions (question_text) VALUES ('Pregunta 2');
