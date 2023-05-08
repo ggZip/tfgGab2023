@@ -7,6 +7,27 @@ Este servicio se encarga de devolver las preguntas y respuestas del cuestionario
 - Docker
 - Docker Compose
 
+## Estructura de archivos
+
+```
+questionnaire
+├── Dockerfile
+├── Dockerfile.test
+├── README.md
+├── go.mod
+├── go.sum
+├── main.go
+└── src
+    ├── handlers
+    │   └── handlers.go
+    ├── models
+    │   ├── answers.go
+    │   ├── db.go
+    │   ├── questionnaires.go
+    │   └── questions.go
+    └── test
+        └── questionnaire_test.go
+```
 ## Cómo ejecutar el servicio
 
 1. Asegúrate de tener instalado Docker y Docker Compose en tu sistema.

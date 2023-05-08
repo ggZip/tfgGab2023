@@ -44,6 +44,7 @@ services:
     environment:
       - PORT=3002
       - DATABASE_URL=postgresql://gabuntu:gabuntuPassword@db:5432/mydb
+      - DATABASE_HOST=db
     depends_on:
       - db
 

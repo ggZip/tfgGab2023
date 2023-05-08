@@ -23,7 +23,7 @@ function Login() {
       if (response.ok) {
         const data = await response.json();
         setMessage("Inicio de sesión exitoso");
-        login(data.user.id);
+        login(data.user.id, data.token);
         navigate("/dashboard");;
       } else {
         const error = await response.json();

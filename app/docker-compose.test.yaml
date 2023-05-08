@@ -1,0 +1,78 @@
+version: '3.9'
+
+services:
+  registration-service:
+    build: ./services/registration
+    container_name: Registration_TEST
+    command: npm test
+    environment:
+      DB_HOST: registration-db-test
+      DB_PORT: 5432
+      DB_USER: registration
+      DB_PASSWORD: testpassword
+      DB_NAME: registrationtestdb
+    depends_on:
+      - registration-db-test
+
+  registration-db-test:
+    build: ./db
+    container_name: Database_registration_TEST
+    restart: always
+    environment:
+      POSTGRES_USER: registration
+      POSTGRES_PASSWORD: testpassword
+      POSTGRES_DB: registrationtestdb
+    ports:
+      - "5433:5432"
+
+  authentication_test:
+    build: ./services/authentication
+    container_name: Authentication_TEST
+    command: npm test
+    environment:
+      - DATABASE_URL=postgresql://authentication:testpassword@authentication-db-test:5432/authenticationtestdb
+      - DATABASE_HOST=authentication_test_db
+    volumes:
+      - ./authentication:/usr/src/app
+    depends_on:
+      - authentication-db-test
+
+  authentication-db-test:
+    build: ./db
+    container_name: Database_authentication_TEST
+    environment:
+      POSTGRES_USER: authentication
+      POSTGRES_PASSWORD: testpassword
+      POSTGRES_DB: authenticationtestdb
+
+  questionnaire-test:
+    build:
+      context: ./services/questionnaire
+      dockerfile: Dockerfile.test
+    container_name: Questionnaire_TEST
+    environment:
+      - DATABASE_URL=postgresql://questionnaire:testpassword@questionnaire-db-test:5432/questionnairtestdb
+    command: go test -v ./src/test/
+    depends_on:
+      - questionnaire-db-test
+
+  questionnaire-db-test:
+    build: ./db
+    container_name: Database_questionnaire_TEST
+    environment:
+      POSTGRES_USER: questionnaire
+      POSTGRES_PASSWORD: testpassword
+      POSTGRES_DB: questionnairtestdb
+
+  # evaluation-test:
+  #   build: ./services/evaluation
+  #   container_name: Evaluation_TEST
+  #   command: pytest
+  #   volumes:
+  #     - ./services/evaluation:/app
+  #   working_dir: /app/src
+  #   environment:
+  #     - DATABASE_URL="sqlite:///:memory:"
+  #     - PYTHONPATH=/app
+
+      

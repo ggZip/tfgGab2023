@@ -8,17 +8,21 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
-  const login = (userId) => {
+  const login = (userId, token) => {
     setUser({ userId });
+    setToken(token);
   };
 
   const logout = () => {
     setUser(null);
+    setToken(null);
   };
 
   const value = {
     user,
+    token,
     login,
     logout,
   };
