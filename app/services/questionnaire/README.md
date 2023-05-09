@@ -28,7 +28,7 @@ questionnaire
     └── test
         └── questionnaire_test.go
 ```
-## Cómo ejecutar el servicio
+## Cómo ejecutar el servicio localmente
 
 1. Asegúrate de tener instalado Docker y Docker Compose en tu sistema.
 
@@ -42,6 +42,18 @@ questionnaire
 docker-compose up --build
 ```
 El servicio de cuestionario ahora debería estar en ejecución y escuchando en el puerto 3003.
+
+## TEST UNITARIOS
+
+Para ejecutar las pruebas unitarias, sigue estos pasos:
+
+1. Asegúrate de que Docker y Docker Compose estén instalados en tu máquina.
+
+2. Navega a la carpeta raíz del proyecto (donde se encuentra el archivo docker-compose.test.yaml) y ejecuta el siguiente comando para ejecutar las pruebas en un contenedor de Docker:
+```
+docker-compose -f docker-compose.test.yaml up --build --abort-on-container-exit
+```
+Este comando construirá la imagen del contenedor, instalará las dependencias necesarias y ejecutará las pruebas. Los resultados de las pruebas se mostrarán en la consola al finalizar.
 
 ## API
 - `GET /questionnaire`: Devuelve las preguntas y respuestas del cuestionario.

@@ -5,6 +5,7 @@ import { useAuth } from "./AuthContext";
 const Questionnaire = () => {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState(Array(10).fill(null));
+  const [questionnaireName, setQuestionnaireName] = useState("");
   const [errorMessage, setErrorMessage] = useState('');
   const [message, setMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -28,15 +29,24 @@ const Questionnaire = () => {
     setAnswers(newAnswers);
   };
 
+  const handleQuestionnaireNameChange = (event) => {  
+    setQuestionnaireName(event.target.value);
+  };
+
   const handleSubmit = () => {
-    if (answers.some((answer) => answer === null)) {
+    if (!questionnaireName.trim()) {
+      setErrorMessage('Falta el nombre del cuestionario');
+    } else if (answers.some((answer) => answer === null)) {
       setErrorMessage('Faltan preguntas por contestar');
     } else {
-      const requestData = answers.map((answerId, index) => ({
-        user_id: user.userId,
-        question_id: questions[index].id,
-        answer_id: answerId,
-      }));
+      const requestData = {
+        questionnaire_name: questionnaireName, 
+        answers: answers.map((answerId, index) => ({
+          user_id: user.userId,
+          question_id: questions[index].id,
+          answer_id: answerId,
+        })),
+      };
 
       fetch('http://localhost:8080/api4/evaluate', {
         method: 'POST',
@@ -47,7 +57,7 @@ const Questionnaire = () => {
       }).then((response) => {
         if (response.ok) {
           response.json().then((responseData) => {
-            setMessage(`Tu probabilidad de aprobar es de: ${responseData.calculated_mark}`);
+            setMessage(`Tu probabilidad de aprobar es del ${responseData.calculated_mark}%`);
             setShowModal(true);
           });
         } else {
@@ -56,9 +66,19 @@ const Questionnaire = () => {
       });
     }
   };
+  const handleGoBack = () => {
+    navigate('/dashboard');
+  };
 
   return (
     <div className="Questionnaire">
+      <input
+        type="text"
+        className="questionnaire-name-input"
+        placeholder="Introduce el nombre del cuestionario"
+        value={questionnaireName}
+        onChange={handleQuestionnaireNameChange}
+      /> {}
       {questions.map((question, questionIndex) => (
         <div key={question.id} className="question">
           <h3>{question.question_text}</h3>
@@ -77,6 +97,7 @@ const Questionnaire = () => {
         </div>
       ))}
       <button onClick={handleSubmit} className="submit-questionnaire-button">Enviar cuestionario</button>
+      <button onClick={handleGoBack} className="submit-questionnaire-button">Cancelar</button>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       {showModal && (

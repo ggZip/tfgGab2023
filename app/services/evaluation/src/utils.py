@@ -19,10 +19,11 @@ def get_answer_ids(user_answers):
     return [user_answer["answer_id"] for user_answer in user_answers]
 
 
-def create_questionnaire(user_id, calculated_mark):
+def create_questionnaire(user_id, calculated_mark, questionnaire_name): 
     questionnaire = Questionnaire(
         user_id=user_id,
         calculated_mark=calculated_mark,
+        questionnaire_name=questionnaire_name, 
     )
     return questionnaire
 

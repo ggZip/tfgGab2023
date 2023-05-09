@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 const UserQuestionnaires = () => {
@@ -6,6 +7,7 @@ const UserQuestionnaires = () => {
   const [realMarks, setRealMarks] = useState({});
   const [showModal, setShowModal] = useState(false);
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const fetchQuestionnaires = async () => {
     const response = await fetch(`http://localhost:8080/api3/questionnaire/user/${user.userId}`);
@@ -56,16 +58,24 @@ const UserQuestionnaires = () => {
     }));
   };
 
+  const handleGoBack = () => {
+    navigate('/dashboard');
+  };
+
   return (
     <div className="UserQuestionnaires">
       {questionnaires.length === 0 ? (
-        <p className="no-questionnaires-message">No se han realizado cuestionarios</p>
+        <div>
+          <p className="no-questionnaires-message">Aún no se han realizado cuestionarios</p>
+          <button onClick={handleGoBack}>Volver al Dashboard</button>
+        </div>
       ) : (
         <div className="questionnaire-list">
           {questionnaires.map((q) => (
             <div key={q.id} className="questionnaire-item">
+              <div>{q.questionnaire_name}</div>
               <div>Realizado el: {formatDate(q.created_at)}</div>
-              <div>Probabilidad de aprobar: {q.calculated_mark}</div>
+              <div>Probabilidad de aprobar: {q.calculated_mark}%</div>
               <div className="real-mark">
                 {q.real_mark !== null ? (
                   <div>Nota real: {q.real_mark}</div>

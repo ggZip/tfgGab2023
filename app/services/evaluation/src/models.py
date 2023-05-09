@@ -32,5 +32,6 @@ class Questionnaire(db.Model):
     __tablename__ = "questionnaire"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    questionnaire_name = db.Column(db.String(255), nullable=False)
     calculated_mark = db.Column(db.Float)
     real_mark = db.Column(db.Float, nullable=True)

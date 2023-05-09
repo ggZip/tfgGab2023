@@ -9,6 +9,7 @@ import (
 type UserQuestionnaire struct {
 	ID            int64   `json:"id"`
 	UserID        int64   `json:"user_id"`
+	QuestionnaireName string  `json:"questionnaire_name"`
 	CalculatedMark float64 `json:"calculated_mark"`
 	RealMark      *float64 `json:"real_mark"`
 	CreatedAt     time.Time `json:"created_at"`
@@ -17,7 +18,7 @@ type UserQuestionnaire struct {
 func FetchUserQuestionnaires(ctx context.Context, db *pgxpool.Pool, userID int64) ([]UserQuestionnaire, error) {
 	questionnaires := []UserQuestionnaire{}
 
-	rows, err := db.Query(ctx, "SELECT id, user_id, calculated_mark, real_mark, created_at FROM questionnaire WHERE user_id = $1", userID)
+	rows, err := db.Query(ctx, "SELECT id, user_id, questionnaire_name, calculated_mark, real_mark, created_at FROM questionnaire WHERE user_id = $1", userID)
 	if err != nil {
 		return nil, err
 	}
@@ -25,7 +26,7 @@ func FetchUserQuestionnaires(ctx context.Context, db *pgxpool.Pool, userID int64
 
 	for rows.Next() {
 		questionnaire := UserQuestionnaire{}
-		err := rows.Scan(&questionnaire.ID, &questionnaire.UserID, &questionnaire.CalculatedMark, &questionnaire.RealMark, &questionnaire.CreatedAt)
+		err := rows.Scan(&questionnaire.ID, &questionnaire.UserID, &questionnaire.QuestionnaireName, &questionnaire.CalculatedMark, &questionnaire.RealMark, &questionnaire.CreatedAt)
 		if err != nil {
 			return nil, err
 		}

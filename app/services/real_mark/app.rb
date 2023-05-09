@@ -5,7 +5,7 @@ require_relative 'models'
 class RealMarkTrackApp < Sinatra::Base
   register Sinatra::ActiveRecordExtension
 
-  set :database, "postgresql://gabuntu:gabuntuPassword@db:5432/mydb"
+  set :database, ENV['DATABASE_URL']
   set :port, 3005
   set :bind, '0.0.0.0'
   
