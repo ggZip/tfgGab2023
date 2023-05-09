@@ -1,7 +1,7 @@
 from flask import Flask
-from routes import register_routes
-from models import db
-from config import Config
+from routes.routes import register_routes 
+from commons.models import db
+from config.config import Config
 
 app = Flask(__name__)
 

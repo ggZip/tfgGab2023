@@ -1,52 +1,30 @@
-# import unittest
-# import json
-# from models import db
-# from src.evaluation import create_app
+from flask import Flask
+from commons.models import db
+from commons.models import Questionnaire
+from commons.utils import create_questionnaire, calculate_mark, get_user_id, get_answer_ids
 
+def test_calculate_mark():
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://evaluation:testpassword@evaluation-db-test:5432/evaluationtestdb'
+    db.init_app(app)
+    with app.app_context():  
+        answer_ids = [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+        assert calculate_mark(answer_ids) == 99  
 
+def test_get_user_id():
+    user_answers = [{"user_id": 1, "answer_id": 1}]
+    assert get_user_id(user_answers) == 1
 
-# class TestEvaluationService(unittest.TestCase):
-#     def setUp(self):
-#         self.app = create_app()
-#         self.app.config['TESTING'] = True
-#         self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
-#         self.app_context = self.app.app_context()
-#         self.app_context.push()
-#         db.init_app(self.app)
-#         db.create_all()
+def test_get_answer_ids():
+    user_answers = [{"user_id": 1, "answer_id": 1}]
+    assert get_answer_ids(user_answers) == [1]
 
-#     def tearDown(self):
-#         db.session.remove()
-#         db.drop_all()
-#         self.app_context.pop()
-
-#     # (resto del contenido de la clase TestEvaluationService)
-
-
-#     def test_evaluate(self):
-#         user_answers = [
-#             {
-#                 "user_id": 1,
-#                 "question_id": 1,
-#                 "answer_id": 1
-#             }
-#         ]
-
-#         response = self.app.post(
-#             "/evaluate",
-#             data=json.dumps(user_answers),
-#             content_type="application/json",
-#         )
-
-#         self.assertEqual(response.status_code, 200)
-#         data = json.loads(response.data)
-#         self.assertEqual(data["calculated_mark"], 1)
-
-
-# if __name__ == "__main__":
-#     unittest.main()
-import unittest
-
-class TestSimple(unittest.TestCase):
-    def test_simple_addition(self):
-        self.assertEqual(1 + 1, 2)
+def test_create_questionnaire():
+    user_id = 1
+    calculated_mark = 5.0
+    questionnaire_name = "Test"
+    questionnaire = create_questionnaire(user_id, calculated_mark, questionnaire_name)
+    assert isinstance(questionnaire, Questionnaire)
+    assert questionnaire.user_id == user_id
+    assert questionnaire.calculated_mark == calculated_mark
+    assert questionnaire.questionnaire_name == questionnaire_name

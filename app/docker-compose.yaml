@@ -79,6 +79,7 @@ services:
 
   tyk_gateway:
     image: 'tykio/tyk-gateway:v4.0.0'
+    container_name: APIgateway
     ports:
       - '8080:8080'
     volumes:
