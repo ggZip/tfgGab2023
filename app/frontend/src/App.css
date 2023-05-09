@@ -220,21 +220,28 @@ p {
 .UserQuestionnaires .questionnaire-list {
   display: flex;
   flex-direction: column;
+  border: 1px solid #CAD2C5; /* Añadir borde */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); /* Añadir sombra */
+  border-radius: 4px; /* Añadir bordes redondeados */
 }
 
 .UserQuestionnaires .questionnaire-item {
   display: flex;
+  flex-direction: row; /**/
   justify-content: space-between;
   align-items: center;
   background-color: #52796F;
   padding: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem;/**/
+  /*margin-bottom: 1rem;*/
   border-radius: 4px;
 }
 
 .UserQuestionnaires .questionnaire-item div {
   flex-basis: 25%;
   text-align: center;
+  border: 1px solid #CAD2C5; /* Añadir bordes */
+  padding: 0.5rem; /* Añadir padding */
 }
 
 .UserQuestionnaires .questionnaire-item input[type="text"],
