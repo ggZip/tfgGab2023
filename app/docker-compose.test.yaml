@@ -64,16 +64,27 @@ services:
       POSTGRES_PASSWORD: testpassword
       POSTGRES_DB: questionnairtestdb
 
-  # evaluation-test:
-  #   build: ./services/evaluation
-  #   container_name: Evaluation_TEST
-  #   command: pytest
-  #   volumes:
-  #     - ./services/evaluation:/app
-  #   working_dir: /app/src
-  #   environment:
-  #     - DATABASE_URL="sqlite:///:memory:"
-  #     - PYTHONPATH=/app
+  evaluation-test:
+      build: 
+        context: ./services/evaluation
+        dockerfile: Dockerfile.test
+      container_name: Evaluation_TEST
+      command: pytest -v ./src/tests
+      environment:
+        - DATABASE_URL=postgresql://evaluation:testpassword@evaluation-db-test:5432/evaluationtestdb
+        - PYTHONPATH=/app/src
+      depends_on:
+        - evaluation-db-test
+
+  evaluation-db-test:
+    build: ./db
+    container_name: Database_evaluation_TEST
+    environment:
+      POSTGRES_USER: evaluation
+      POSTGRES_PASSWORD: testpassword
+      POSTGRES_DB: evaluationtestdb
+
+
 
   real-mark-test:
     build:
@@ -93,5 +104,3 @@ services:
       POSTGRES_USER: realmark
       POSTGRES_PASSWORD: testpassword
       POSTGRES_DB: realmarktestdb
-
-      

@@ -1,5 +1,4 @@
-from models import Answer, QuestionnaireQuestionAnswer, Questionnaire
-
+from commons.models import Answer, QuestionnaireQuestionAnswer, Questionnaire
 def calculate_mark(answer_ids):
     total_weight = 0
 

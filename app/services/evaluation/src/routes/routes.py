@@ -1,7 +1,6 @@
 from flask import request, jsonify
-from models import db
-from utils import calculate_mark, get_user_id, get_answer_ids, create_questionnaire, create_questionnaire_question_answers
-
+from commons.models import db
+from commons.utils import calculate_mark, get_user_id, get_answer_ids, create_questionnaire, create_questionnaire_question_answers
 def register_routes(app):
     @app.route("/evaluate", methods=["POST"])
     def evaluate():
