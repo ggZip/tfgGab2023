@@ -16,7 +16,7 @@ def register_routes(app):
 
         calculated_mark = calculate_mark(answer_ids)
 
-        questionnaire = create_questionnaire(user_id, calculated_mark, questionnaire_name)  # Pasas el nombre del cuestionario
+        questionnaire = create_questionnaire(user_id, calculated_mark, questionnaire_name) 
 
         db.session.add(questionnaire)
         db.session.commit()
