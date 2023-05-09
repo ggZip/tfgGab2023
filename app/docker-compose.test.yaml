@@ -75,4 +75,23 @@ services:
   #     - DATABASE_URL="sqlite:///:memory:"
   #     - PYTHONPATH=/app
 
+  real-mark-test:
+    build:
+      context: ./services/real_mark
+      dockerfile: Dockerfile.test
+    container_name: RealMark_TEST
+    environment:
+      - DATABASE_URL=postgresql://realmark:testpassword@realmark-db-test:5432/realmarktestdb
+    command: ruby -Ilib:test tests/app_test.rb
+    depends_on:
+      - realmark-db-test
+
+  realmark-db-test:
+    build: ./db
+    container_name: Database_realmark_TEST
+    environment:
+      POSTGRES_USER: realmark
+      POSTGRES_PASSWORD: testpassword
+      POSTGRES_DB: realmarktestdb
+
       

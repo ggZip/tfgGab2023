@@ -75,7 +75,7 @@ const UserQuestionnaires = () => {
             <div key={q.id} className="questionnaire-item">
               <div>{q.questionnaire_name}</div>
               <div>Realizado el: {formatDate(q.created_at)}</div>
-              <div>Probabilidad de aprobar: {q.calculated_mark}</div>
+              <div>Probabilidad de aprobar: {q.calculated_mark}%</div>
               <div className="real-mark">
                 {q.real_mark !== null ? (
                   <div>Nota real: {q.real_mark}</div>
