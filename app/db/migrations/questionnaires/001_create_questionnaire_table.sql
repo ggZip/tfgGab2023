@@ -1,6 +1,7 @@
 CREATE TABLE questionnaire (
     id SERIAL PRIMARY KEY,
     user_id INTEGER,
+    questionnaire_name VARCHAR(255) NOT NULL,
     calculated_mark DECIMAL,
     real_mark DECIMAL NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
