@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
+import "./UserQuestionnaires.css";
 
 const UserQuestionnaires = () => {
   const [questionnaires, setQuestionnaires] = useState([]);
   const [realMarks, setRealMarks] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [error, setError] = useState('');
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -22,8 +24,8 @@ const UserQuestionnaires = () => {
   const handleSubmit = async (questionnaireId) => {
     const realMark = realMarks[questionnaireId];
 
-    if (realMark === undefined || isNaN(realMark)) {
-      alert('No ha introducido una nota');
+    if (realMark === undefined || isNaN(realMark) || realMark < 0 || realMark > 10) {
+      setError('Por favor, introduce una nota válida entre 0 y 10');
       return;
     }
 
@@ -52,6 +54,7 @@ const UserQuestionnaires = () => {
   };
 
   const handleInputChange = (questionnaireId, value) => {
+    setError('');
     setRealMarks((prevRealMarks) => ({
       ...prevRealMarks,
       [questionnaireId]: parseFloat(value),
@@ -67,7 +70,7 @@ const UserQuestionnaires = () => {
       {questionnaires.length === 0 ? (
         <div>
           <p className="no-questionnaires-message">Aún no se han realizado cuestionarios</p>
-          <button onClick={handleGoBack}>Volver al Dashboard</button>
+          <button onClick={handleGoBack}>Volver a la página principal</button>
         </div>
       ) : (
         <div className="questionnaire-list">
@@ -84,19 +87,23 @@ const UserQuestionnaires = () => {
                     <input
                       type="text"
                       placeholder="Nota real"
+                      className="real-mark-input"
                       onChange={(e) => handleInputChange(q.id, e.target.value)}
                     />
                     <button onClick={() => handleSubmit(q.id)}>
                       Enviar nota
                     </button>
-                    {showModal && (
-                      <div className="modal">
-                        <div className="modal-content">
-                          <p>Gracias por el feedback</p>
-                          <button onClick={closeModal}>De nada</button>
+                    {error
+                      ? <div className="error-message">{error}</div>
+                      : (showModal && (
+                        <div className="modal">
+                          <div className="modal-content">
+                            <p>Gracias por el feedback</p>
+                            <button onClick={closeModal}>De nada</button>
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      ))
+                    }
                   </>
                 )}
               </div>

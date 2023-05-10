@@ -1,4 +1,4 @@
-import "./App.css";
+import "./Register.css";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -40,18 +40,21 @@ function Register() {
     <div className="Register">
       <h1>Registrarse</h1>
       <input
+        className="register-input"
         type="text"
         placeholder="Nombre de usuario"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
       <input
+        className="register-input"
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
+        className="register-input"
         type="password"
         placeholder="Contraseña"
         value={password}

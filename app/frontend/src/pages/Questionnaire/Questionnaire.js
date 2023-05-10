@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext";
-
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import "./Questionnaire.css";
 const Questionnaire = () => {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState(Array(10).fill(null));

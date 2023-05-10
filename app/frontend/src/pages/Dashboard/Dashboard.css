@@ -1,0 +1,54 @@
+.Dashboard {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    padding-bottom: 1rem;
+    background-color: var(--color-bg);
+    border-radius: 4px;
+    box-shadow: var(--color-box-shadow);
+    transition: all 0.3s ease;
+}
+  
+  h1 {
+    font-family: 'Roboto', sans-serif; /* fuente personalizada */
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--color-text);
+  }
+  
+  button {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    color: var(--color-bg);
+    background-color: var(--color-button);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* sombra alrededor del botón */
+  }
+  
+  button:hover {
+    background-color: #ff5500; /* color de botón naranja oscuro al pasar el mouse por encima */
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* sombra más grande al pasar el mouse por encima */
+  }
+
+
+button:hover {
+    background-color: var(--color-button-hover);
+    transform: scale(1.05);
+}
+
+button:disabled {
+    background-color: var(--color-button-disabled);
+    cursor: not-allowed;
+}
+
+@media screen and (max-width: 767px) {
+    .Dashboard {
+        padding: 1rem;
+    }
+}
