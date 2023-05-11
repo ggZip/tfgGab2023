@@ -1,15 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Register from "./Register";
-import Login from "./Login";
-import Dashboard from "./Dashboard";
-import Questionnaire from "./Questionnaire";
-import UserQuestionnaires from "./UserQuestionnaires";
-import Header from "./Header";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
-import { AuthProvider } from "./AuthContext";
+import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Questionnaire from "./pages/Questionnaire/Questionnaire";
+import UserQuestionnaires from "./pages/UserQuestionnaires/UserQuestionnaires";
+import Header from "./components/Header/Header";
+import NavBar from "./components/NavBar/NavBar";
+import Footer from "./components/Footer/Footer";
+import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
   return (

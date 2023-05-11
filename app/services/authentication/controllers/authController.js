@@ -13,14 +13,14 @@ exports.login = async (req, res) => {
     const result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
 
     if (result.rowCount === 0) {
-      return res.status(400).json({ error: 'Invalid email or password' });
+      return res.status(400).json({ error: 'Email o contraseña incorrecta' });
     }
 
     const user = result.rows[0];
     const validPassword = await bcrypt.compare(password, user.password);
 
     if (!validPassword) {
-      return res.status(400).json({ error: 'Invalid email or password' });
+      return res.status(400).json({ error: 'Email o contraseña incorrecta' });
     }
 
     const token = generateToken(user);

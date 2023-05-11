@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext";
-
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import "./Questionnaire.css";
 const Questionnaire = () => {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState(Array(10).fill(null));
@@ -11,6 +11,7 @@ const Questionnaire = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
+  const [currentQuestion, setCurrentQuestion] = useState(0);
 
   useEffect(() => {
     fetch('http://localhost:8080/api3/questionnaire')
@@ -18,18 +19,36 @@ const Questionnaire = () => {
       .then((data) => setQuestions(data));
   }, []);
 
+  const handleNext = () => {
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
+    }
+  };
+
   const handleModalClose = () => {
     setShowModal(false);
     navigate("/user_questionnaires");
   };
 
   const handleAnswerChange = (questionIndex, answerId) => {
-    const newAnswers = answers.slice();
-    newAnswers[questionIndex] = answerId;
-    setAnswers(newAnswers);
+    setAnswers(prevAnswers => {
+      return prevAnswers.map((answer, index) => {
+        if (index === questionIndex) {
+          return answer === answerId ? null : answerId;
+        } else {
+          return answer;
+        }
+      });
+    });
   };
 
-  const handleQuestionnaireNameChange = (event) => {  
+  const handleQuestionnaireNameChange = (event) => {
     setQuestionnaireName(event.target.value);
   };
 
@@ -40,7 +59,7 @@ const Questionnaire = () => {
       setErrorMessage('Faltan preguntas por contestar');
     } else {
       const requestData = {
-        questionnaire_name: questionnaireName, 
+        questionnaire_name: questionnaireName,
         answers: answers.map((answerId, index) => ({
           user_id: user.userId,
           question_id: questions[index].id,
@@ -78,26 +97,47 @@ const Questionnaire = () => {
         placeholder="Introduce el nombre del cuestionario"
         value={questionnaireName}
         onChange={handleQuestionnaireNameChange}
-      /> {}
-      {questions.map((question, questionIndex) => (
-        <div key={question.id} className="question">
-          <h3>{question.question_text}</h3>
-          {question.answers.map((answer) => (
+      />
+      <div className="progress-bar">
+        <div
+          className="progress-bar-fill"
+          style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+        />
+      </div>
+      {questions.length > 0 && (
+        <div key={questions[currentQuestion].id} className="question">
+          <h3>{questions[currentQuestion].question_text}</h3>
+          {questions[currentQuestion].answers.map((answer) => (
             <div key={answer.id} className="answer">
               <input
                 type="radio"
                 id={`answer-${answer.id}`}
-                name={`question-${question.id}`}
+                name={`question-${questions[currentQuestion].id}`}
                 value={answer.id}
-                onChange={() => handleAnswerChange(questionIndex, answer.id)}
+                checked={answers[currentQuestion] === answer.id}
+                onChange={() => handleAnswerChange(currentQuestion, answer.id)}
               />
               <label htmlFor={`answer-${answer.id}`}>{answer.answer_text}</label>
             </div>
           ))}
         </div>
-      ))}
-      <button onClick={handleSubmit} className="submit-questionnaire-button">Enviar cuestionario</button>
-      <button onClick={handleGoBack} className="submit-questionnaire-button">Cancelar</button>
+      )}
+      <div className="question-navigation">
+        <button onClick={handlePrev} disabled={currentQuestion === 0}>
+          Anterior
+        </button>
+        <button onClick={handleNext} disabled={currentQuestion === questions.length - 1}>
+          Siguiente
+        </button>
+      </div>
+      {currentQuestion === questions.length - 1 && (
+        <button onClick={handleSubmit} className="submit-questionnaire-button">
+          Enviar cuestionario
+        </button>
+      )}
+      <button onClick={handleGoBack} className="cancel-questionnaire-button">
+        Cancelar
+      </button>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       {showModal && (
