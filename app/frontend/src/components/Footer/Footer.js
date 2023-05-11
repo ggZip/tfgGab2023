@@ -1,15 +1,3 @@
-// import React from "react";
-// import "./Footer.css";
-
-// function Footer() {
-//   return (
-//     <footer className="Footer">
-//       <p>&copy; 2023 - CanUPass</p>
-//     </footer>
-//   );
-// }
-
-// export default Footer;
 import React from "react";
 import "./Footer.css";
 
@@ -17,7 +5,7 @@ function Footer() {
   return (
     <footer className="Footer">
       <div className="footer-description">
-        <p>CanUPass es una aplicación de cuestionarios.</p>
+        <p>CanUPass es una aplicación de cuestionarios que te ayudará a saber tus posibilidades de aprobar un examen.</p>
       </div>
       <div className="social-media-links">
         <a href="https://www.facebook.com" target="_blank">Facebook</a>

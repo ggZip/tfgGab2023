@@ -1,29 +1,16 @@
 :root {
   --color-text-header: #FFFFFF;
   --color-bg-header: #2A9D8F;
+  --color-button-color-mode: #2A9D8F;
 }
 
 body.dark-mode {
   --color-text-header: #80CFA9;
   --color-bg-header: #0d1314;
+  --color-button-color-mode: #354F52;
 }
-
 
 .Header {
-    background-color: var(--color-bg-header);
-    padding: 1rem;
-    text-align: center;
-    color: var(--color-text-header);
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
-}
-
-@media screen and (max-width: 767px) {
-    .Header {
-        padding: 0.5rem;
-    }
-}
-
-/* .Header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -41,13 +28,26 @@ body.dark-mode {
 .header-nav {
   flex: 1;
   display: flex;
-  justify-content: space-around;
+  justify-content: Right;
 }
 
 .toggle-theme {
-  flex: 1;
-  text-align: right;
+  flex: none;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--color-border-button);
+  border-radius: 4px;
+  background-color: var(--color-button-color-mode);
+  color: var(--color-text-header);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 20%;
+  margin-left: 8px;
 }
+
+.toggle-theme:hover {
+  background-color: var(--color-button-hover);
+}
+
 
 @media screen and (max-width: 767px) {
   .Header {
@@ -58,9 +58,12 @@ body.dark-mode {
   .logo,
   .toggle-theme {
     text-align: center;
+    margin: 0.5rem;
+    width: 40%;
   }
 
   .header-nav {
     flex-direction: column;
+    justify-content: space-between;
   }
-} */
+}

@@ -65,6 +65,10 @@ p {
 a {
   color: var(--color-a);
   text-decoration: none;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 a:hover {
@@ -75,22 +79,22 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 button {
-    width: 90%;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border: 2px solid var(--color-border-button);
-    border-radius: 4px;
-    font-size: 16px;
-    color: var(--color-text);
-    transition: all 0.3s ease;
+  width: 95%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 2px solid var(--color-border-button);
+  border-radius: 4px;
+  font-size: 16px;
+  color: var(--color-text);
+  transition: all 0.3s ease;
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
-    outline: none;
-    border-color: var(--color-button);
-    box-shadow: 0 0 5px var(--color-button);
+  outline: none;
+  border-color: var(--color-button);
+  box-shadow: 0 0 5px var(--color-button);
 }
 
 .modal {
@@ -103,7 +107,7 @@ input[type="password"]:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.3s ease; /* Esto agrega una transición suave cuando el modal aparece y desaparece */
+  transition: all 0.3s ease;
 }
 
 .modal-content {
@@ -111,23 +115,23 @@ input[type="password"]:focus {
   padding: 20px;
   border-radius: 4px;
   text-align: center;
-  width: 80%; /* Esto hace que el contenido del modal ocupe el 80% del ancho de la ventana, puedes ajustarlo a tus necesidades */
-  max-width: 500px; /* Esto limita el ancho máximo del modal para que no se vea demasiado grande en pantallas grandes */
-  box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.1); /* Esto agrega una sombra alrededor del modal para darle un poco de profundidad */
-  transition: all 0.3s ease; /* Esto agrega una transición suave cuando el modal aparece y desaparece */
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .modal-content p {
-  font-size: 1.2em; /* Esto hace que el texto en el modal sea un poco más grande que el texto normal */
+  font-size: 1.2em;
 }
 
 .modal-content button {
-  margin-top: 20px; /* Esto agrega un poco de espacio entre el texto y el botón */
-  padding: 10px 20px; /* Esto hace que el botón sea un poco más grande y más fácil de hacer clic */
-  font-size: 1em; /* Esto hace que el texto en el botón sea un poco más grande */
-  border: none; /* Esto elimina el borde predeterminado del botón */
-  border-radius: 4px; /* Esto le da al botón bordes redondeados */
-  cursor: pointer; /* Esto cambia el cursor a una mano cuando pasas el ratón sobre el botón */
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .error-message {

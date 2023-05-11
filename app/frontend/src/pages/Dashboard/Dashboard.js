@@ -10,7 +10,7 @@ function Dashboard() {
         <button>Realizar nuevo cuestionario</button>
       </Link>
       <Link to="/user_questionnaires">
-      <button>Ver cuestionarios realizados</button>
+        <button>Ver cuestionarios realizados</button>
       </Link>
     </div>
   );

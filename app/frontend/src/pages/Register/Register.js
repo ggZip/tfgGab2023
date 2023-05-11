@@ -11,6 +11,19 @@ function Register() {
   const navigate = useNavigate();
 
   const handleRegister = async () => {
+    if (!username.trim()) {
+      setMessage('Por favor, introduce tu nombre de usuario');
+      return;
+    }
+    if (!email.trim()) {
+      setMessage('Por favor, introduce tu email');
+      return;
+    }
+
+    if (!password.trim()) {
+      setMessage('Por favor, introduce tu contraseña');
+      return;
+    }
     try {
       const response = await fetch("http://localhost:8080/api1/user/register", {
         method: "POST",
@@ -25,6 +38,7 @@ function Register() {
       } else {
         const error = await response.json();
         setMessage(`Error de registro: ${error.error}`);
+        if (error.error === `duplicate key value violates unique constraint "users_username_key"`) setMessage(`Error de registro: Nombre de usuario ya existe`);
       }
     } catch (err) {
       setMessage(`Error de registro: ${err.message}`);
@@ -33,6 +47,9 @@ function Register() {
 
   const handleModalClose = () => {
     setShowModal(false);
+    navigate("/");
+  };
+  const handleCancel = () => {
     navigate("/");
   };
 
@@ -61,10 +78,8 @@ function Register() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleRegister}>Registrarse</button>
-      {message && message !== "Registro exitoso" && <p>{message}</p>}
-      <Link to="/">
-        <button>Cancelar</button>
-      </Link>
+      {message && message !== "Registro exitoso" && <p className="error-message">{message}</p>}
+      <button onClick={handleCancel}>Cancelar</button>
 
       {showModal && (
         <div className="modal">

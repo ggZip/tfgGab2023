@@ -42,6 +42,7 @@ h1 {
     border-color: var(--color-button);
     box-shadow: 0 0 5px var(--color-button);
 }
+
 button {
     background-color: var(--color-button);
     color: var(--color-bg);

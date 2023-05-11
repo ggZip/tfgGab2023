@@ -12,6 +12,15 @@ function Login() {
   const { login } = useAuth();
 
   const handleLogin = async () => {
+    if (!email.trim()) {
+      setMessage('Por favor, introduce tu email');
+      return;
+    }
+
+    if (!password.trim()) {
+      setMessage('Por favor, introduce tu contraseña');
+      return;
+    }
     try {
       const response = await fetch("http://localhost:8080/api2/auth/login", {
         method: "POST",
@@ -23,8 +32,8 @@ function Login() {
 
       if (response.ok) {
         const data = await response.json();
-        setMessage("Inicio de sesión exitoso");  
-        login(data.user.id,data.user.username, data.token);
+        setMessage("Inicio de sesión exitoso");
+        login(data.user.id, data.user.username, data.token);
         setShowModal(true);
       } else {
         const error = await response.json();
@@ -33,6 +42,10 @@ function Login() {
     } catch (err) {
       setMessage(`Error de inicio de sesión: ${err.message}`);
     }
+  };
+
+  const handleRegister = () => {
+    navigate("/register");
   };
 
   const handleModalClose = () => {
@@ -58,10 +71,8 @@ function Login() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleLogin}>Iniciar sesión</button>
-      {message && message !== "Inicio de sesión exitoso" && <p>{message}</p>}
-      <Link to="/register">
-        <button>Registrarse</button>
-      </Link>
+      {message && message !== "Inicio de sesión exitoso" && <p className="error-message">{message}</p>}
+      <button onClick={handleRegister}>Registrarse</button>
       {showModal && (
         <div className="modal">
           <div className="modal-content">

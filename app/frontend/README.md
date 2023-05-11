@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# Front-end de la aplicación
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este parte del proyecto es una aplicación de React que incluye autenticación de usuario, cuestionarios, y más, con el objetivo de dar una buena experiencia de usuario para la aplicación final. 
 
-## Available Scripts
+## Requisitos
 
-In the project directory, you can run:
+- Docker
+- Docker Compose
+- npm
 
-### `npm start`
+## Estructura de archivos principal
+```
+frontend/src/
+├── App.css
+├── App.js
+├── App.test.js
+├── assets
+│   └── logo.svg
+├── components
+│   ├── Footer
+│   │   ├── Footer.css
+│   │   └── Footer.js
+│   ├── Header
+│   │   ├── Header.css
+│   │   └── Header.js
+│   └── NavBar
+│       ├── NavBar.css
+│       └── NavBar.js
+├── contexts
+│   └── AuthContext.js
+├── index.css
+├── index.js
+├── pages
+│   ├── Dashboard
+│   │   ├── Dashboard.css
+│   │   └── Dashboard.js
+│   ├── Login
+│   │   ├── Login.css
+│   │   └── Login.js
+│   ├── Questionnaire
+│   │   ├── Questionnaire.css
+│   │   └── Questionnaire.js
+│   ├── Register
+│   │   ├── Register.css
+│   │   └── Register.js
+│   └── UserQuestionnaires
+│       ├── UserQuestionnaires.css
+│       └── UserQuestionnaires.js
+├── reportWebVitals.js
+└── setupTests.js
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Instalación
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Para instalar las dependencias del proyecto, ejecuta:
 
-### `npm test`
+```bash
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Uso
 
-### `npm run build`
+- Para iniciar la aplicación en modo de desarrollo, ejecuta:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm start
+```
+Abre http://localhost:3000 para verlo en el navegador.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+La página se recargará si haces ediciones. También verás cualquier error lint en la consola.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Para ejecutar el contenedor:
+Navega a la carpeta raíz del proyecto (donde se encuentra el archivo `docker-compose.yaml`) y ejecuta el siguiente comando para iniciar el servicio junto con sus dependencias
+```bash
+docker-compose up -d
+```

@@ -40,11 +40,11 @@ const UserQuestionnaires = () => {
       }),
     });
 
-    setShowModal(true);
+    setShowModal(prevState => ({ ...prevState, [questionnaireId]: true }));
   };
 
-  const closeModal = () => {
-    setShowModal(false);
+  const closeModal = (questionnaireId) => {
+    setShowModal(prevState => ({ ...prevState, [questionnaireId]: false }));
     fetchQuestionnaires();
   };
 
@@ -95,7 +95,7 @@ const UserQuestionnaires = () => {
                     </button>
                     {error
                       ? <div className="error-message">{error}</div>
-                      : (showModal && (
+                      : (showModal[q.id] && (
                         <div className="modal">
                           <div className="modal-content">
                             <p>Gracias por el feedback</p>

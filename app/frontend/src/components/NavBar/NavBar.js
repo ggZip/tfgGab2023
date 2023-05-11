@@ -7,13 +7,8 @@ function NavBar() {
   const { user, logout } = useAuth();
   const location = useLocation();
   const currentPath = location.pathname;
-  const [darkMode, setDarkMode] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-
-  React.useEffect(() => {
-    document.body.classList.toggle('dark-mode', darkMode);
-  }, [darkMode]);
 
   const handleLogout = (event) => {
     event.preventDefault();
@@ -28,9 +23,6 @@ function NavBar() {
 
   return (
     <nav className="Nav-bar">
-      <a onClick={() => setDarkMode(!darkMode)}>
-        Cambiar a modo {darkMode ? 'claro' : 'oscuro'}
-      </a>
       {!user && currentPath === "/register" && <Link to="/">Iniciar sesión</Link>}
       {!user && currentPath === "/" && <Link to="/register">Registrarse</Link>}
       {user && (
