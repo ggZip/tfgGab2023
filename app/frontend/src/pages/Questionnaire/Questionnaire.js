@@ -4,7 +4,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import "./Questionnaire.css";
 const Questionnaire = () => {
   const [questions, setQuestions] = useState([]);
-  const [answers, setAnswers] = useState(Array(10).fill(null));
+  const [answers, setAnswers] = useState(Array(8).fill(null));
   const [questionnaireName, setQuestionnaireName] = useState("");
   const [errorMessage, setErrorMessage] = useState('');
   const [message, setMessage] = useState("");
