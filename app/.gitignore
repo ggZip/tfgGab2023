@@ -4,6 +4,7 @@
 .dockerignore
 .docker/
 *.log
+*.env
 
 # Ignorar archivos generados por Tyk
 tyk_api_gateway/analytics/
@@ -17,3 +18,41 @@ tyk_api_gateway/apps/*.json
 
 # Ignorar archivos generados por Windows
 Thumbs.db
+
+# Archivos de Node.js / React.js
+node_modules/
+npm-debug.log
+/package-lock.json
+/.pnp
+.pnp.js
+/yarn.lock
+
+# Archivos de Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+/vendor/
+
+# Archivos de Python
+*.pyc
+__pycache__/
+
+# Archivos de Ruby
+*.gem
+/.config
+/.bundle
+/.yardoc
+/_yardoc
+/doc/
+/spec/reports/
+/.rvmrc
+
+# Archivos de base de datos
+*.sqlite
+
+# Archivos de IDE
+.idea/
+*.iml
+
