@@ -5,34 +5,40 @@ Este directorio contiene las migraciones de la base de datos para cada uno de lo
 ## Estructura
 
 ```
-db
-├── migrations/
-│ ├── questionnaires/
-│ │    ├── 001_create_questionnaires_table.sql
-│ ├── realtestscores/
-│ │    ├── 001_create_realtestscores_table.sql
-│ ├── users/
-│ │    ├── 001_create_usuarios_table.sql
+db/
 ├── Dockerfile
+├── README.md
 ├── init-db.sh
-└── README-md
+└── migrations
+    ├── population
+    │   └── 001_populate_questionnaires.sql
+    ├── questionnaires
+    │   └── 001_create_questionnaire_table.sql
+    ├── relations
+    │   └── 001_create_relations_table.sql
+    └── users
+        └── 001_create_users_table.sql
 ```
 
-## Migraciones
+## Migrations
 
-Las migraciones están ubicadas en la carpeta `migrations`. Cada archivo de migración contiene una instrucción SQL que crea una tabla en la base de datos. Estos archivos se ejecutarán al iniciar la base de datos.
+Las migraciones están ubicadas en esta carpeta. Cada archivo de migración contiene instrucciones SQL para crear tablas y rellenar la base de datos. Estos archivos se ejecutarán al iniciar la base de datos.
 
-### Usuarios
+### Users
 
 Contiene la tabla `users` que almacena la información de los usuarios y sus roles.
 
 ### Questionnaires
 
-Contiene las tablas `questionnaires` y `questions` para almacenar los cuestionarios creados por los administradores y las preguntas asociadas.
+Contiene las tablas `questionnaire`, `questions` y `answers` para almacenar los cuestionarios realizados por lso usuarios, las preguntas del cuestioanrio y sus respectivas respuestas.
 
-### Real Test Scores
+### Relations
 
-Contiene la tabla `real_test_scores` que almacena la nota real obtenida por los usuarios en los exámenes reales junto con las respuestas dadas en el cuestionario asociado.
+Contiene la tabla `questionnaire_questions_answers` que representa la relación entre la pregunta y la respuesta que ha elegido un usuario en un cuestionario.
+
+### Population
+
+Contiene los INSERT necesarios para crear el cuestionario.
 
 ## Docker
 

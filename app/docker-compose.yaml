@@ -11,9 +11,9 @@ services:
     container_name: Database
     restart: always
     environment:
-      POSTGRES_USER: gabuntu
-      POSTGRES_PASSWORD: gabuntuPassword
-      POSTGRES_DB: mydb
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
     ports:
       - "5432:5432"
     volumes:
@@ -27,11 +27,11 @@ services:
       - '3001:3001'
     environment:
       - PORT=3001
-      - DB_HOST=db
+      - DB_HOST=${DATABASE_HOST}
       - DB_PORT=5432
-      - DB_USER=gabuntu
-      - DB_PASSWORD=gabuntuPassword
-      - DB_NAME=mydb
+      - DB_USER=${DATABASE_USER}
+      - DB_PASSWORD=${DATABASE_PASSWORD}
+      - DB_NAME=${DATABASE_NAME}
     depends_on:
       - db
 
@@ -43,8 +43,8 @@ services:
       - '3002:3002'
     environment:
       - PORT=3002
-      - DATABASE_URL=postgresql://gabuntu:gabuntuPassword@db:5432/mydb
-      - DATABASE_HOST=db
+      - DATABASE_URL=postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:5432/${DATABASE_NAME}
+      - DATABASE_HOST=${DATABASE_HOST}
     depends_on:
       - db
 
@@ -71,7 +71,7 @@ services:
     container_name: RealMark
     restart: always
     environment:
-      DATABASE_URL: "postgresql://gabuntu:gabuntuPassword@db:5432/mydb"
+      DATABASE_URL: "postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:5432/${DATABASE_NAME}"
     ports:
       - "3005:3005"
     depends_on:
